@@ -2,11 +2,16 @@ import PropTypes from 'prop-types';
 
 import css from './ImageCard.module.css';
 
-const ImageCard = ({ data: { urls, alt_description } }) => {
+const ImageCard = ({
+	image: {
+		urls: { small },
+		alt_description,
+	},
+}) => {
 	return (
 		<>
 			<div>
-				<img src={urls.small} alt={alt_description} />
+				<img className={css.galleryImg} src={small} alt={alt_description} />
 			</div>
 		</>
 	);
@@ -14,7 +19,6 @@ const ImageCard = ({ data: { urls, alt_description } }) => {
 
 export default ImageCard;
 
-Contact.propTypes = {
+ImageCard.propTypes = {
 	data: PropTypes.object,
-	onDelete: PropTypes.func,
 };

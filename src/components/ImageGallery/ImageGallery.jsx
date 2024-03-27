@@ -1,21 +1,20 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import css from './ImageGallery.module.css';
-import Contact from '../ImageCard/ImageCard';
+import ImageCard from '../ImageCard/ImageCard';
 
-const ImageGallery = ({ images, handleClick }, ref) => {
+const ImageGallery = ({ images, onOpen }) => {
 	return (
 		<>
-			<ul className={css.list} ref={ref}>
+			<ul className={css.list}>
 				{images.map(image => (
 					<li
-						className={css.item}
 						key={image.id}
 						onClick={() => {
-							handleClick(image);
+							onOpen(image);
 						}}
 					>
-						<ImageCard data={image} />
+						<ImageCard image={image} />
 					</li>
 				))}
 			</ul>
@@ -25,7 +24,7 @@ const ImageGallery = ({ images, handleClick }, ref) => {
 
 export default ImageGallery;
 
-ContactList.propTypes = {
-	contacts: PropTypes.array,
+ImageGallery.propTypes = {
+	images: PropTypes.array,
 	handleClick: PropTypes.func,
 };

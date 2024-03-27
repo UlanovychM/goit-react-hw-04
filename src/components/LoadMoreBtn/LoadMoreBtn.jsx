@@ -1,9 +1,11 @@
-const Loader = () => {
+const LoadMoreBtn = ({ onLoad }) => {
 	return (
 		<div>
-			<p>Loading data, please wait...</p>
+			<button type='button' onClick={onLoad}>
+				Load more
+			</button>
 		</div>
 	);
 };
 
-export default Loader;
+export default LoadMoreBtn;

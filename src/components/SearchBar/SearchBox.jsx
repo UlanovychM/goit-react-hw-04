@@ -1,24 +1,32 @@
 import css from './SearchBox.module.css';
+import toast from 'react-hot-toast';
 
 const SearchBar = ({ onSearch }) => {
-	const handleSubmit = evt => {
-		evt.preventDefault();
-		const form = evt.target;
+	const handleSubmit = e => {
+		e.preventDefault();
+		const form = e.target;
 		const search = form.elements.search.value;
-
-		form.reset();
-
-		if (search.trim() === '') {
-			alert('Please, enter the text to search for images');
+		if (form.elements.search.value.trim() === '') {
+			toast.error('Please enter search name of images!');
+			return;
 		}
+
 		onSearch(search);
+		form.reset();
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<input type='text' name='search' placeholder='Search image...' />
-			<button>Search</button>
-		</form>
+		<div className={css.wrap}>
+			<form onSubmit={handleSubmit} className={css.form}>
+				<input
+					className={css.input}
+					type='text'
+					name='search'
+					placeholder='Search image...'
+				/>
+				<button className={css.btn}>Search</button>
+			</form>
+		</div>
 	);
 };
 
