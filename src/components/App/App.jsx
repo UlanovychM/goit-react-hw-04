@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import fetchImageApi from '../services/gallery-api';
 import { Toaster } from 'react-hot-toast';
 import css from './App.module.css';
@@ -24,6 +24,29 @@ function App() {
 	useEffect(() => {
 		Modal.setAppElement('#root');
 	}, []);
+
+	const imageRef = useRef();
+
+	const handleScroll = () => {
+		if (!imageRef.current) {
+			return;
+		}
+
+		if (page > 1) {
+			const backdown = imageRef.current.getBoundingClientRect();
+			const y = backdown.height * 2.5;
+
+			window.scrollTo({
+				top: y,
+				behavior: 'smooth',
+				block: 'start',
+			});
+		}
+	};
+
+	useEffect(() => {
+		handleScroll();
+	}, [images]);
 
 	useEffect(() => {
 		if (valueSearch.trim() === '') {
@@ -75,11 +98,10 @@ function App() {
 		<>
 			<div className={css.container}>
 				<SearchBar onSearch={handelSearch} />
-
 				{loader && <Loader />}
 
 				{images.length > 0 && (
-					<ImageGallery images={images} onOpen={openModal} />
+					<ImageGallery images={images} onOpen={openModal} ref={imageRef} />
 				)}
 				{selectedImage.urls && (
 					<ImageModal
@@ -90,7 +112,6 @@ function App() {
 				)}
 				{error && <ErrorMessage />}
 				{loadBtn && <LoadMoreBtn onLoad={handleShowMore} />}
-
 				<Toaster position='top-right' />
 			</div>
 		</>

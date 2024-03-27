@@ -11,7 +11,7 @@ const fetchImageApi = async (stringValue, pageNumber) => {
 		params: {
 			query: stringValue,
 			page: pageNumber,
-			per_page: 2,
+			per_page: 10,
 			orientation: 'landscape',
 			client_id: ACCESS_KEY,
 		},

@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import css from './ImageGallery.module.css';
+import { forwardRef } from 'react';
 import ImageCard from '../ImageCard/ImageCard';
+import css from './ImageGallery.module.css';
 
-const ImageGallery = ({ images, onOpen }) => {
+const ImageGallery = forwardRef(({ images, onOpen }, ref) => {
 	return (
 		<>
-			<ul className={css.list}>
+			<ul className={css.list} ref={ref}>
 				{images.map(image => (
 					<li
 						key={image.id}
@@ -20,11 +20,11 @@ const ImageGallery = ({ images, onOpen }) => {
 			</ul>
 		</>
 	);
-};
+});
 
 export default ImageGallery;
 
 ImageGallery.propTypes = {
 	images: PropTypes.array,
-	handleClick: PropTypes.func,
+	onOpen: PropTypes.func,
 };
