@@ -26,7 +26,7 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		if (valueSearch.trim === '') {
+		if (valueSearch.trim() === '') {
 			return;
 		}
 		const getData = async () => {
@@ -60,7 +60,7 @@ function App() {
 		setPage(1);
 		setImages([]);
 
-		if (value.trim === '') {
+		if (value.trim() === '') {
 			setLoadBtn(false);
 		}
 	};
