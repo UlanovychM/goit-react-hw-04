@@ -55,12 +55,11 @@ function App() {
 		const getData = async () => {
 			try {
 				setLoader(true);
-				setError(false);
 				const { data, total_pages } = await fetchImageApi(valueSearch, page);
 				setImages(prevData => {
 					return [...prevData, ...data];
 				});
-				if (data.length > 0 || total_pages > 12) {
+				if (data.length > 0 || total_pages < 12) {
 					setLoadBtn(true);
 				}
 			} catch (e) {
